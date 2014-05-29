@@ -1,12 +1,19 @@
 {
-  "name": "rtc2-5",
-  "version": "0.0.0",
+  "name": "rct2",
+  "version": "2.5.0",
   "description": "",
   "homepage": "",
   "bugs": "",
   "keywords": [],
   "contributors": [
-    "John Doe <johndoe@example.org>"
+     {
+      "name": "Marian Sievers",
+      "email": "info@mariansievers.de"
+    },
+    {
+      "name": "Thomas Hampe",
+      "email": "thomas@hampe.co"
+    }
   ],
   "repository": {
     "type": "git",
