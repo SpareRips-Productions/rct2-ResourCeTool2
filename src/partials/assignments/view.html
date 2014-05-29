@@ -1,7 +1,7 @@
 <div ng-controller="AssignmentsCtrl">
   <h2>Assignments</h2>
-  <label>for Week</label>
-  <button ng-click="incrementWeek()">+</button><input type="number" ng-model="week" /><button ng-click="decrementWeek()">-</button>
+  <label for="week">for Week</label>
+  <button ng-click="incrementWeek()">+</button><input id="week" type="number" ng-model="week" /><button ng-click="decrementWeek()">-</button>
   <form ng-submit="saveNewAssignment()">
     <legend>Create a new Assignmet Task</legend>
     <label for="assignmentName">Name</label>
@@ -15,7 +15,13 @@
     <input type="text" ng-model="newAssignment.utilization">
     <button type="submit">save</button>
   </form>
-  {{ newAssignment }}
 
-  {{ assignments }}
+  <div>
+  <div ng-repeat="day in days">
+    <strong>{{ day }}</strong>
+    <div ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week}">
+      {{ assignment.name }} <button ng-click="removeAssignment(id)">remove</button>
+    </div>
+  </div>
+  </div>
 </div>

@@ -10,8 +10,8 @@
 <div ng-repeat="(id,project) in projects">
   <h4>{{ project.name }}</h4>
   <button ng-click="removeProject(id)">delete</button>
-  <div ng-repeat="assigment in assignments|projectFilter: id">
-  {{ assigment }}
+  <div ng-repeat="assignment in assignments|firebaseFilter: {project: id}">
+  {{ assignment.name }} [<em>{{ assignment.utilization }}%</em> on {{ assignment.day }} - Week {{ assignment.week }}]
   </div>
 </div>
 

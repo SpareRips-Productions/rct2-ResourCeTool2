@@ -6,16 +6,8 @@ module.exports = angular.module('app.sssignments', [])
     add: function(data) {
       this.assignments.$add(data);
     },
-    getByProjectId: function(projectId) {
-      var a = [];
-      for(var i in assignments) {
-        var assignment = assignments[i];
-        if(assignment.project == projectId) {
-          a.push(assignment);
-        }
-      }
-      console.log(a);
-      return a;
+    remove: function(id) {
+      this.assignments.$remove(id);
     }
   };
 })
@@ -36,5 +28,8 @@ module.exports = angular.module('app.sssignments', [])
     $scope.newAssignment.week = $scope.week;
     AssignmentsFactory.add($scope.newAssignment);
     $scope.newAssignment = {};
+  };
+  $scope.removeAssignment = function(id) {
+    AssignmentsFactory.remove(id);
   }
 });

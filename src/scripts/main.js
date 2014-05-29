@@ -16,16 +16,21 @@ angular.module('app', [
 .controller('AppCtrl', function($scope, VERSION){
 	$scope.version = VERSION;
 })
-.filter('projectFilter', function(){
+.filter('firebaseFilter', function(){
 
   return function(input, query){
     if(!query) return input;
-    var result = [];
-
-    angular.forEach(input, function(assignment){
-      if(assignment.project == query){
-        result.push(assignment); 
-      }                 
+    var result = {};
+    angular.forEach(input, function(assignment, id){
+      if(!assignment) {
+        return;
+      }
+      for(var key in query) {
+        if(assignment[key] != query[key]) {
+          return;
+        }
+      }
+      result[id] = assignment;                
     });
     return result;
   };
