@@ -1,0 +1,18 @@
+<div ng-controller="ProjectsCtrl">
+<h2>Projects</h2>
+<form ng-submit="saveNewProject()">
+  <legend>Add a Project</legend>
+  <label for="projectName">Name</label>
+  <input id="projectName" type="text" ng-model="newProject.name" />
+  <button type="submit">Save</button>
+</form> 
+<!-- Project List -->
+<div ng-repeat="(id,project) in projects">
+  <h4>{{ project.name }}</h4>
+  <button ng-click="removeProject(id)">delete</button>
+  <div ng-repeat="assigment in assignments|projectFilter: id">
+  {{ assigment }}
+  </div>
+</div>
+
+</div>
