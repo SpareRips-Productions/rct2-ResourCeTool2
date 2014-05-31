@@ -1,0 +1,15 @@
+<div ng-controller="LoginCtrl">
+  <h2>Login</h2>
+  <form ng-submit="login()">
+      <label>
+          <span>email</span>
+          <input type="email" ng-model="email" />
+      </label>
+      <label>
+          <span>password</span>
+          <input type="password" ng-model="pass" />
+      </label>
+      <button type="submit">Log In</button>
+      <p ng-show="err" class="error">{{err}}</p>
+  </form>
+</div>

@@ -5,7 +5,7 @@ angular.module('app', [
   require('./projects').name,
   require('./users').name,
   require('./assignments').name,
-  require('./config.js').name
+  require('./config.js').name,
 ])
 .factory('FirebaseRef', function(FBURL){
     return function(ref) {
@@ -13,8 +13,11 @@ angular.module('app', [
       return new Firebase(baseUrl+ref);
     }
 })
-.controller('AppCtrl', function($scope, VERSION){
+.controller('AppCtrl', function($scope, VERSION, loginService){
 	$scope.version = VERSION;
+  $scope.logout = function() {
+    loginService.logout();
+  };
 })
 .filter('firebaseFilter', function(){
 
@@ -42,6 +45,14 @@ angular.module('app', [
   //
   // Now set up the states
   $stateProvider
+    .state('login', {
+      url: "/login",
+      views: {
+        "header": { templateUrl: "partials/header.html" },
+        "footer": { templateUrl: "partials/footer.html" },
+        "content": { templateUrl: "partials/users/login.html" }
+      }
+    })
     .state('app', {
       url: "/",
       views: {
@@ -52,6 +63,7 @@ angular.module('app', [
       }
     })
     .state('app.projects', {
+      authRequired: true,
       url: "projects",
       views: {
         "sub-content": { templateUrl: "partials/projects/view.html" }
@@ -59,19 +71,24 @@ angular.module('app', [
       
     })
     .state('app.assignments', {
+      authRequired: true,
       url: "assignments",
       views: {
         "sub-content": { templateUrl: "partials/assignments/view.html" }
       }
     })
     .state('app.users', {
+      authRequired: true,
       url: "users",
       views: {
         "sub-content": { templateUrl: "partials/users/view.html" }
       }
     })
   ;
-});
-
+})
+.run(function(loginService, $rootScope, FBURL){
+  $rootScope.auth = loginService.init();
+  $rootScope.FBURL = FBURL;
+})
 ;
 
