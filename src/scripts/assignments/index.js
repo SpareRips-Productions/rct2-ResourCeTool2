@@ -11,9 +11,10 @@ module.exports = angular.module('app.sssignments', [])
     }
   };
 })
-.controller( 'AssignmentsCtrl', function($scope, ProjectsFactory, AssignmentsFactory){
+.controller( 'AssignmentsCtrl', function($scope, ProjectsFactory, AssignmentsFactory, loginService, UsersFactory){
   
   $scope.week = moment().week();
+  $scope.users = UsersFactory.users;
   $scope.newAssignment = {};
   $scope.projects = ProjectsFactory.projects;
   $scope.assignments = AssignmentsFactory.assignments;
@@ -26,6 +27,7 @@ module.exports = angular.module('app.sssignments', [])
   };
   $scope.saveNewAssignment = function() {
     $scope.newAssignment.week = $scope.week;
+    $scope.newAssignment.user = loginService.currentUser().email;
     AssignmentsFactory.add($scope.newAssignment);
     $scope.newAssignment = {};
   };

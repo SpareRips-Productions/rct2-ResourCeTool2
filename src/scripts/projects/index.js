@@ -30,6 +30,4 @@ module.exports = angular.module('app.projects', ['firebase', 'app'])
   $scope.removeProject = function(id) {
     ProjectsFactory.remove(id);
   }
-
-  console.log($scope.projects)
 });

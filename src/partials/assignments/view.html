@@ -17,11 +17,24 @@
   </form>
 
   <div>
-  <div ng-repeat="day in days">
-    <strong>{{ day }}</strong>
-    <div ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week}">
-      {{ assignment.name }} <button ng-click="removeAssignment(id)">remove</button>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th ng-repeat="day in days">{{ day }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="user in users">
+          <td>{{ user.name }}</td>
+          <th ng-repeat="day in days">
+          <span ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week, user: user.email}">
+            {{ assignment.name }} <button ng-click="removeAssignment(id)">remove</button><br/>
+          </span>
+          </th>
+        </tr>      
+      </tbody>
+    </table>
   </div>
-  </div>
+  
 </div>

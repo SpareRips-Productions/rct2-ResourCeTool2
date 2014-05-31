@@ -18,6 +18,7 @@ angular.module('app', [
   $scope.logout = function() {
     loginService.logout();
   };
+  $scope.currentUser = loginService.currentUser;
 })
 .filter('firebaseFilter', function(){
 

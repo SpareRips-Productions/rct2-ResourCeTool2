@@ -7,10 +7,16 @@
   <!-- substitute:css -->
 </head>
 <body ng-app="app" ng-controller="AppCtrl">
-  <header ui-view="header"></header>
-  <div ui-view="nav"></div>
-  <div class="content" ui-view="content"></div>
-  <div ui-view="footer"></div>
+  <div ng-cloak>
+    <header ui-view="header"></header>
+    <div ui-view="nav"></div>
+    <div class="content" ui-view="content"></div>
+    <div ui-view="footer"></div>
+  </div>
+  <div ng-cloak class="splash">
+  loading...
+  </div>
+  
 
 
   <!-- substitute:livereload -->
