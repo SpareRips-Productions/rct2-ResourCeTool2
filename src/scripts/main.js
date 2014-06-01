@@ -1,6 +1,7 @@
 
 angular.module('app', [
   'ui.router',
+  'ui.bootstrap',
   'firebase',
   require('./projects').name,
   require('./users').name,
@@ -39,6 +40,46 @@ angular.module('app', [
     return result;
   };
 })
+.filter('firebaseLikeFilter', function(){
+  function comapreString(stra, strb){
+        stra = ("" + stra).toLowerCase();
+        strb = ("" + strb).toLowerCase();
+        return stra.indexOf(strb) !== -1;
+  }
+  return function(input, query){
+    if(!query || query == "") return input;
+    var result = {};
+    angular.forEach(input, function(assignment, id){
+      if(!assignment) {
+        return;
+      }
+      for(var i in assignment) {
+        if(comapreString(assignment[i], query)) {
+          result[id] = assignment;  
+          break;
+        }
+      }
+                    
+    });
+    return result;
+  };
+})
+.filter('firebaseLimitTo', function(){
+  return function(input, query){
+    if(!query || query == "") return input;
+    var result = {};
+    var counter = 0;
+    angular.forEach(input, function(assignment, id){
+      if(counter < query) {
+        result[id] = assignment;
+        counter++;
+      }
+                    
+    });
+    return result;
+  };
+})
+
 .config(function($stateProvider, $urlRouterProvider) {
   //
   // For any unmatched url, redirect to /state1

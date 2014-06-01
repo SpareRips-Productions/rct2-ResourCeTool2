@@ -1,10 +1,7 @@
 <header>
-  <h1><a ui-sref="app">rct2</a></h1>
-
-  <a ng-show-auth="logout" ui-sref="login">Login</a>
-  <div ng-show-auth="login">
-     <em>{{ currentUser().email }}</em>
-    <button ng-click="logout()">Logout</button>
+  <div class="container">
+    <h1 class="text-center header-title hidden-xs"><a ui-sref="app">rct2</a></h1>
+    <div ng-show-auth="login" class="hide">Logged In</div>
   </div>
   
 </header>

@@ -43,16 +43,14 @@ RouteSecurityManager.prototype = {
     },
 
     _login: function() {
-       this._authenticated = true;
-       console.log(this._redirectTo);
-       if( this._redirectTo ) {
-          this._redirect(this._redirectTo);
-          this._redirectTo = null;
-       }
-       else if( this._location.path() === this._loginPath ) {
-          this._location.replace();
-          this._location.path('/');
-       }
+      this._authenticated = true;
+      if( this._redirectTo ) {
+        this._redirect(this._redirectTo);
+        this._redirectTo = null;
+      }
+      else if(this._state.current.name === this._loginPath ) {
+        this._redirect("app");
+      }
     },
 
     _logout: function() {
@@ -74,22 +72,21 @@ RouteSecurityManager.prototype = {
     // A function to check whether the current path requires authentication,
     // and if so, whether a redirect to a login page is needed.
     _authRequiredRedirect: function(route, path) {
+console.log(route.name, this._authenticated, route.name === this._loginPath)
        if (route.authRequired && !this._authenticated){
           
           if (route.pathTo === undefined) {
              
              this._redirectTo = route.name;
-             console.log(route); 
           } else {
              this._redirectTo = route.pathTo === path ? "app" : route.name;
-             console.log(this._redirectTo); 
 
           }
-          console.log(this._redirectTo); 
           this._redirect(path);
           return true;
        }
-       else if( this._authenticated && this._location.path() === this._loginPath ) {
+       else if( this._authenticated && route.name === this._loginPath ) {
+          console.log("doing redirect", route.name);
           this._redirect('app');
           return true;
        }

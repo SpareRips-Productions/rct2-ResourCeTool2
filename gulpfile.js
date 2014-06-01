@@ -16,7 +16,7 @@ require('pho-devstack')(gulp, {
     }
   }),
 
-  copy: ['images/sprites/**/*', 'humans.txt', 'bower_components/**/*.{js,css}']
+  copy: ['images/sprites/**/*', 'humans.txt', 'bower_components/**/*.{js,css,ttf,svg,eot,woff,otf}']
 });
 
 // If needed, redefine tasks here

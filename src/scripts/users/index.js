@@ -2,6 +2,7 @@ module.exports = angular.module('app.users', [
   require('./login.js').name,
   require('./security.js').name,
   'firebase', 
+  'ui.gravatar',
   'app'
 ])
 .factory('UsersFactory', function(FirebaseRef, $firebase){
