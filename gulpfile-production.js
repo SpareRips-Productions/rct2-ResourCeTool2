@@ -9,8 +9,8 @@ require('pho-devstack')(gulp, {
   browserify: {
     debug: false,
     transforms: {
-      "browserify-ngmin": true,
-      uglifyify: true
+      "browserify-ngmin": false,
+      uglifyify: false
     }
   },
   less: {
@@ -40,7 +40,7 @@ require('pho-devstack')(gulp, {
     // cdn: 'http://example.com' // url to your cdn server
   }),
 
-  copy: ['humans.txt', 'bower_components/*']
+  copy: ['humans.txt', 'bower_components/**/*.{js,css,ttf,svg,eot,woff,otf}']
 });
 
 // If needed, redefine tasks here

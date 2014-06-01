@@ -1,94 +1,102 @@
 <div ng-controller="AssignmentsCtrl">
-  <div class="row">
-    <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-      <div class="input-group form-group">
+    <div class="row">
+        <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+            <div class="input-group form-group">
                 <span class="input-group-btn">
           <button class="btn btn-default" ng-click="decrementWeek()">-</button>
         </span>
-        <p class="form-control-static form-control text-center">{{ week }}. Week of 2014</p>
+
+                <p class="form-control-static form-control text-center">{{ week }}. Week of 2014</p>
         <span class="input-group-btn">
           <button class="btn btn-default" ng-click="incrementWeek()">+</button>
         </span>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-7">
-      <form ng-submit="saveNewAssignment()" class="well">
-        <legend>Create a new Task</legend>
-        <div class="form-group">
-          <label for="assignmentName">Name</label>
-          <input type="text" id="assignmentName" class="form-control" ng-model="newAssignment.name" placeholder="Awesome Task..."/>
-        </div>
-        <div class="form-group">
-          <label for="assignmentProject">Project</label>
-          <select id="assignmentProject" class="form-control" ng-model="newAssignment.project" ng-options="k as v.name for (k, v) in projects"></select>
-        </div>
-        <div class="form-group">
-          <label for="assignmentDay">Day</label>
-          <select class="form-control" id="assignmentDay" ng-model="newAssignment.day" ng-options="day for day in days"></select>
-        </div>
-        <div class="form-utilization">
-          <label for="assignmentUtilization">Utilization (in %)</label>
-          <div class="row">
-            <div class="col-sm-6">
-              <input type="range" ng-model="newAssignment.utilization">
             </div>
-            <div class="col-sm-6">
-              <input class="form-control" type="text" ng-model="newAssignment.utilization">
-            </div>
-          </div>
         </div>
-        
-        
-        
-        <button class="btn btn-default" type="submit">save</button>
-      </form>
     </div>
-    <div class="col-sm-5 tasks-icon hidden-xs">
-      <i class="fa fa-tasks"></i>
-    </div>
-  </div>
-  <div class="row">
-    <div class="filter form-group col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-      <input type="search" class="form-control filter-control" placeholder="search users" ng-model="search" />
-    </div>
-  </div>
-  <div class="grid">
-    <div class="row hidden-xs">
-      <div class="col-sm-2">
-        <div class="grid-header"> User</div>
-      </div>
-      <div class="col-sm-2" ng-repeat="day in days">
-        <div class="grid-header">{{ day }}</div>
-      </div>
-    </div>
-    <div class="row" ng-repeat="user in users | firebaseLikeFilter: search">
-      <div class="col-sm-2">
-        <div class="grid-item"><strong>{{ user.name }}</strong></div>
-      </div>
-      <div class="col-sm-2" ng-repeat="day in days">
-        <div class="grid-item">
-          <div class="visible-xs text-center">{{day}}</div>
-          <progress>
 
-            <bar 
-                ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week, user: user.email}" 
-                type="{{ barColor(id) }}" 
-                value="assignment.utilization"
-              >
-              <div tooltip="{{ getProjectName(assignment.project) }}: {{assignment.name}}"> {{ assignment.utilization }}%</div>
-            </bar>
-          </progress>
-          <ul class="list-unstyled">
-            <li ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week, user: user.email}">
-              {{ getProjectName(assignment.project) }}: {{assignment.name}}
-              <button ng-click="removeAssignment(id)" class="btn btn-{{ barColor(id) }} btn-xs pull-right"><i class="fa fa-times"></i></button>
-            </li>
-          </ul>
+    <div class="row">
+        <div class="col-sm-7">
+            <form ng-submit="saveNewAssignment()" class="well">
+                <legend>Create a new Task</legend>
+                <div class="form-group">
+                    <label for="assignmentName">Name</label>
+                    <input type="text" id="assignmentName" class="form-control" ng-model="newAssignment.name"
+                           placeholder="Awesome Task..."/>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentProject">Project</label>
+                    <select id="assignmentProject" class="form-control" ng-model="newAssignment.project"
+                            ng-options="k as v.name for (k, v) in projects"></select>
+                </div>
+                <div class="form-group">
+                    <label for="assignmentDay">Day</label>
+                    <select class="form-control" id="assignmentDay" ng-model="newAssignment.day"
+                            ng-options="day for day in days"></select>
+                </div>
+                <div class="form-utilization">
+                    <label for="assignmentUtilization">Utilization (in %)</label>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <input type="range" ng-model="newAssignment.utilization">
+                        </div>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" ng-model="newAssignment.utilization">
+                        </div>
+                    </div>
+                </div>
+
+
+                <button class="btn btn-default" type="submit">save</button>
+            </form>
         </div>
-      </div>
+        <div class="col-sm-5 tasks-icon hidden-xs">
+            <i class="fa fa-tasks"></i>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="filter form-group col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+            <input type="search" class="form-control filter-control" placeholder="search users" ng-model="search"/>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="row hidden-xs">
+            <div class="col-sm-2">
+                <div class="grid-header"> User</div>
+            </div>
+            <div class="col-sm-2" ng-repeat="day in days">
+                <div class="grid-header">{{ day }}</div>
+            </div>
+        </div>
+        <div class="row" ng-repeat="user in users | firebaseLikeFilter: search">
+            <div class="col-sm-2">
+                <div class="grid-item"><strong>{{ user.name }}</strong></div>
+            </div>
+            <div class="col-sm-2" ng-repeat="day in days">
+                <div class="grid-item">
+                    <div class="visible-xs text-center">{{day}}</div>
+                    <progress>
+
+                        <bar
+                                ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week, user: user.email}"
+                                type="{{ barColor(id) }}"
+                                value="assignment.utilization"
+                                >
+                            <div tooltip="{{ getProjectName(assignment.project) }}: {{assignment.name}}"> {{
+                                assignment.utilization }}%
+                            </div>
+                        </bar>
+                    </progress>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="(id,assignment) in assignments | firebaseFilter: {day: day, week: week, user: user.email}">
+                            {{ getProjectName(assignment.project) }}: {{assignment.name}}
+                            <button ng-click="removeAssignment(id)"
+                                    class="btn btn-{{ barColor(id) }} btn-xs pull-right"><i class="fa fa-times"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

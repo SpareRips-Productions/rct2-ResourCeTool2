@@ -1,42 +1,42 @@
 <div ng-controller="ProjectsCtrl">
-<div class="row">
-  <div class="col-sm-7">
-    <form ng-submit="saveNewProject()" class="well">
-      <legend>Add a Project</legend>
-      <div class="form-group">
-        <label for="projectName">Name</label>
-        <input class="form-control" type="text" ng-model="newProject.name" placeholder="Project Name" />
-      </div>
-      <button class="btn btn-default" type="submit">Save</button>
-    </form> 
-  </div>
-  <div class="col-sm-5 projects-icon hidden-xs">
-    <i class="fa fa-file-powerpoint-o"></i>
-  </div>
-</div>
-<div class="row">
-<div class="filter form-group col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-  <input type="search" class="form-control filter-control" placeholder="search projects" ng-model="search" />
-</div>
-</div>
-<!-- Project List -->
-<div class="row">
-  <div class="col-sm-6 col-md-3" ng-repeat="(id,project) in projects | firebaseLikeFilter: search">
-    <div class="thumbnail project-thumbnail">
-      <div class="caption">
-        <h4>{{ project.name }}</h4>
-        <!--<p>
-          <div ng-repeat="assignment in assignments|firebaseFilter: {project: id} | firebaseLimitTo : 4">
-            {{ assignment.name }} [<em>{{ assignment.utilization }}%</em> on {{ assignment.day }} - Week {{ assignment.week }}]
-          </div>
-        </p>-->
-        <p>
-          <button class="btn btn-danger btn-block" ng-click="removeProject(id)">delete</button>
-        </p>
-      </div>
-
+    <div class="row">
+        <div class="col-sm-7">
+            <form ng-submit="saveNewProject()" class="well">
+                <legend>Add a Project</legend>
+                <div class="form-group">
+                    <label for="projectName">Name</label>
+                    <input class="form-control" type="text" ng-model="newProject.name" placeholder="Project Name"/>
+                </div>
+                <button class="btn btn-default" type="submit">Save</button>
+            </form>
+        </div>
+        <div class="col-sm-5 projects-icon hidden-xs">
+            <i class="fa fa-file-powerpoint-o"></i>
+        </div>
     </div>
-  </div>
-</div>
+    <div class="row">
+        <div class="filter form-group col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+            <input type="search" class="form-control filter-control" placeholder="search projects" ng-model="search"/>
+        </div>
+    </div>
+    <!-- Project List -->
+    <div class="row">
+        <div class="col-sm-6 col-md-3" ng-repeat="(id,project) in projects | firebaseLikeFilter: search">
+            <div class="thumbnail project-thumbnail">
+                <div class="caption">
+                    <h4>{{ project.name }}</h4>
+                    <!--<p>
+                      <div ng-repeat="assignment in assignments|firebaseFilter: {project: id} | firebaseLimitTo : 4">
+                        {{ assignment.name }} [<em>{{ assignment.utilization }}%</em> on {{ assignment.day }} - Week {{ assignment.week }}]
+                      </div>
+                    </p>-->
+                    <p>
+                        <button class="btn btn-danger btn-block" ng-click="removeProject(id)">delete</button>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
 </div>

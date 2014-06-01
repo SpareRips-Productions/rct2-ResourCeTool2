@@ -6,3 +6,4 @@ src/bower_components
 dist/bower_components
 dist
 config.js
+src/.idea
