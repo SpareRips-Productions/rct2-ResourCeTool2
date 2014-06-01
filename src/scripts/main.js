@@ -5,6 +5,7 @@ angular.module('app', [
         require('./projects').name,
         require('./users').name,
         require('./assignments').name,
+        require('./overview').name,
         require('./config.js').name,
     ])
     .factory('FirebaseRef', function (FBURL) {
@@ -114,7 +115,7 @@ angular.module('app', [
             })
             .state('app.assignments', {
                 authRequired: true,
-                url: "assignments",
+                url: "tasks",
                 views: {
                     "sub-content": { templateUrl: "partials/assignments/view.html" }
                 }

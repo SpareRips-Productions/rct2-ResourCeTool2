@@ -1,5 +1,36 @@
 <div ui-view="sub-content">
-    <p class="lead">ResourCeTool 2</p>
+    <h2 class="lead text-center">ResourCeTool 2</h2>
 
     <p ng-show-auth="logout"><a ui-sref="login">Login</a> now</p>
+    <div ng-show-auth="login" ng-controller="OverviewCtrl" class="row">
+      <div class="col-md-6">
+        <h4 class="text-center">Projects</h4>
+        <div class="row">
+            <div class="filter form-group col-md-offset-2 col-md-8">
+                <input type="search" class="form-control filter-control" placeholder="search projects" ng-model="searchProject"/>
+            </div>
+        </div>
+        <div class="list-group">
+          <div class="list-group-item" ng-repeat="(id,project) in projects | firebaseLikeFilter: searchProject">
+            {{ project.name }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h4 class="text-center">Tasks</h4>
+        <div class="row">
+            <div class="filter form-group col-md-offset-2 col-md-8">
+                <input type="search" class="form-control filter-control" placeholder="search tasks" ng-model="searchAssignments"/>
+            </div>
+        </div>
+        <div class="list-group">
+          <div class="list-group-item" ng-repeat="(id,assignment) in assignments | firebaseLikeFilter: searchAssignments">
+            <span class="badge">{{ assignment.utilization }}%</span>
+            <h4 class="list-group-item-heading">{{ assignment.name }}</h4>
+            <p class="list-group-item-text"><span class="text-muted">Project:</span> {{ projects[assignment.project].name }}</p>
+            <p class="list-group-item-text"><span class="text-muted">Time:</span> {{ assignment.day }} {{ assignment.week }}. Week 2014</p>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
